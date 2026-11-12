@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -57,12 +57,33 @@ body.side nav{flex-direction:column;overflow:visible;gap:4px;width:100%}body.sid
 body.side .logo{padding-left:11px}.logo span{display:inline-block;overflow:hidden;vertical-align:bottom;transition:max-width .4s,opacity .3s}body.side .logo span{max-width:0;opacity:0}body.side header:hover .logo span{max-width:100px;opacity:1}body.side #th{margin-left:13px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 @media(max-width:700px){.hero .w{grid-template-columns:1fr;text-align:left}.av{width:110px;height:110px;font-size:2.4rem}nav{display:none}}
+/* light-only, mini header, new gradients */
+:root{--bg:#f3f8f7;--alt:#e8f2f0;--a:#0b7a75;--a2:#d98e1f;color-scheme:light}
+@media(min-width:900px){section .w,.hero .w{padding-left:20px}}
+body::before{background:transparent;transition:background .4s}body.mini::before{background:#fff}
+header{height:68px;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom-color:transparent;transition:background .4s,box-shadow .4s,height .4s}
+.bar{height:68px}
+body.mini header{height:60px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--line);box-shadow:0 8px 24px -18px #0b2a3c88}
+body.mini .bar{height:60px}
+.logo{display:flex;align-items:center;gap:10px;line-height:1.2;color:#fff;transition:color .3s}.logo b{display:block;font-size:1rem}.logo small{display:block;font:500 .72rem var(--serif);opacity:.8}
+.lav{font:600 1rem var(--serif);font-style:normal;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#f6c760,#e89a2b);color:#06201d;flex:none}
+body.mini .logo{color:var(--ink)}
+header nav a{color:#e6f4f1}header nav a:hover{background:#ffffff26;color:#fff}
+body.mini header nav a{color:var(--ink2)}body.mini header nav a:hover{background:var(--alt);color:var(--a)}
+header nav a.on{background:var(--ink);color:#fff}body:not(.mini) header nav a.on{background:#ffffff2e}
+.hero{background-image:linear-gradient(125deg,#0a1f4d,#0d4f7c 35%,#0f8f86 70%,#13b38a)}
+.btn{background:linear-gradient(135deg,#f8d27a,#e8942a)}
+section.alt{background:linear-gradient(180deg,#e9f4f1,#e4eef6)}
+.stat b{background:linear-gradient(135deg,#0d4f7c,#0f9a8a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.f button.on{background:linear-gradient(135deg,#0d4f7c,#0f9a8a);border-color:transparent}
+.doi{display:inline-block;margin-top:8px;padding:4px 13px;border-radius:99px;background:linear-gradient(135deg,#0d4f7c,#0f9a8a);color:#fff;font-size:.75rem;font-weight:700;text-decoration:none;transition:transform .2s,filter .2s}.doi:hover{filter:brightness(1.12);transform:translateY(-1px)}
+@media(max-width:700px){.logo small{display:none}}
 </style>
 </head>
 <body>
-<div id="pg"></div><header><div class="w bar"><a class="logo" href="#top"><b>RM</b><span>oni Mia</span></a>
+<div id="pg"></div><header><div class="w bar"><a class="logo" href="#top"><em class="lav">RM</em><div><b>Roni Mia</b><small>Research Associate · VGID Laboratory, BAU</small></div></a>
 <nav><a href="#about"><i>👤</i><span>About</span></a><a href="#education"><i>🎓</i><span>Education</span></a><a href="#experience"><i>🔬</i><span>Experience</span></a><a href="#skills"><i>🧪</i><span>Skills</span></a><a href="#publications"><i>📄</i><span>Publications</span></a><a href="#references"><i>🤝</i><span>References</span></a><a href="#contact"><i>✉️</i><span>Contact</span></a></nav>
-<button id="th" aria-label="Toggle theme">◐</button></div></header>
+</div></header>
 
 <div class="hero" id="top"><div class="w"><div class="av">RM</div><div>
 <span class="tag" id="ty">Viral Genomics</span>
@@ -130,20 +151,19 @@ const R=[
 ["Frontiers in Microbiology","Global evolutionary dynamics of peste des petits ruminants virus reveals geographic lineage structuring and diagnostic mutational signatures",0],
 ["Microbial Pathogenesis","Reassortant high pathogenicity H5N1 clade 2.3.2.1a genotype G1.1 with characteristic mutations isolated from poultry chicken in Bangladesh",0]];
 const L=document.getElementById('list');
-function row(i,y,j,t,f,r){return `<div class="card pub"><div class="n">${i}</div><div><h3>${t}</h3><div class="au">${r?'Under review':y} · Roni Mia ${f?'(first author)':'(co-author)'}</div><div class="j">${j}${f?'<span class="fa">FIRST AUTHOR</span>':''}</div></div></div>`}
-function show(k){let h='';if(k!=='rev')P.forEach((p,i)=>{if(k==='all'||p[3])h+=row(i+1,p[0],p[1],p[2],p[3],0)});if(k!=='first')R.forEach((p,i)=>{h+=row('R'+(i+1),'',p[0],p[1],p[2],1)});L.innerHTML=h;window.rvInit&&rvInit()}
+const D=['','10.1128/mra.01081-25','10.1128/spectrum.03114-25','10.1128/spectrum.00796-25','10.1002/vms3.70594','','10.1128/mra.00881-25','10.1128/mra.00714-25','10.1128/mra.00502-26','10.1002/vms3.70044','10.1128/mra.01382-25','','10.1128/mra.01095-24','10.1128/mra.00825-25'];
+function row(i,y,j,t,f,r,d){return `<div class="card pub"><div class="n">${i}</div><div><h3>${t}</h3><div class="au">${r?'Under review':y} · Roni Mia ${f?'(first author)':'(co-author)'}</div><div class="j">${j}${f?'<span class="fa">FIRST AUTHOR</span>':''}</div>${r?'':`<a class="doi" href="${d?'https://doi.org/'+d:'https://scholar.google.com/scholar?q='+encodeURIComponent(t)}" target="_blank" rel="noopener">${d?'DOI':'Find paper'} ↗</a>`}</div></div>`}
+function show(k){let h='';if(k!=='rev')P.forEach((p,i)=>{if(k==='all'||p[3])h+=row(i+1,p[0],p[1],p[2],p[3],0,D[i])});if(k!=='first')R.forEach((p,i)=>{h+=row('R'+(i+1),'',p[0],p[1],p[2],1)});L.innerHTML=h;window.rvInit&&rvInit()}
 document.getElementById('f').onclick=e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#f button').forEach(x=>x.classList.toggle('on',x===b));show(b.dataset.k)};
 show('all');
-const th=document.getElementById('th');
-try{const s=localStorage.getItem('theme');if(s)document.documentElement.dataset.theme=s}catch(e){}
-th.onclick=()=>{const d=document.documentElement;const dark=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;d.dataset.theme=dark?'light':'dark';try{localStorage.setItem('theme',d.dataset.theme)}catch(e){}};
+
 const B=document.body,hero=document.querySelector('.hero .w'),pg=document.getElementById('pg');
 function count(el){const t=el.textContent,n=parseFloat(t.replace(/[^\d.]/g,'')),pre=t[0]==='~'?'~':'',dec=t.includes('.')?1:0,s=performance.now();(function f(now){const p=Math.min((now-s)/1400,1);el.textContent=pre+(n*(1-Math.pow(1-p,3))).toFixed(dec);if(p<1)requestAnimationFrame(f)})(s)}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const t=e.target;t.classList.add('in');io.unobserve(t);if(t.classList.contains('stat'))count(t.querySelector('b'));setTimeout(()=>t.style.setProperty('--d','0s'),1500)}),{threshold:.12});
 window.rvInit=()=>document.querySelectorAll('section h2:not(.rv),.card:not(.rv),.stat:not(.rv)').forEach((el,i)=>{el.classList.add('rv');el.style.setProperty('--d',(i%4)*90+'ms');io.observe(el)});
 document.addEventListener('mousemove',e=>{const c=e.target.closest&&e.target.closest('.card.in,.stat.in');document.querySelectorAll('.tilt').forEach(x=>{if(x!==c){x.style.setProperty('--rx','0deg');x.style.setProperty('--ry','0deg');x.classList.remove('tilt')}});if(!c)return;const r=c.getBoundingClientRect();c.classList.add('tilt');c.style.setProperty('--ry',((e.clientX-r.left)/r.width-.5)*7+'deg');c.style.setProperty('--rx',(.5-(e.clientY-r.top)/r.height)*7+'deg')});
 const secs=[...document.querySelectorAll('section[id]')],links=[...document.querySelectorAll('nav a')];
-function sc(){const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;B.classList.toggle('side',y>120);pg.style.transform='scaleX('+(h>0?y/h:0)+')';if(y<innerHeight){hero.style.transform='translateY('+y*.22+'px)';hero.style.opacity=Math.max(0,1-y/(innerHeight*.85))}let cur='';secs.forEach(s=>{if(s.getBoundingClientRect().top<innerHeight*.4)cur='#'+s.id});links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')===cur))}
+function sc(){const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;B.classList.toggle('mini',y>80);pg.style.transform='scaleX('+(h>0?y/h:0)+')';if(y<innerHeight){hero.style.transform='translateY('+y*.22+'px)';hero.style.opacity=Math.max(0,1-y/(innerHeight*.85))}let cur='';secs.forEach(s=>{if(s.getBoundingClientRect().top<innerHeight*.4)cur='#'+s.id});links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')===cur))}
 addEventListener('scroll',sc,{passive:true});sc();rvInit();
 const W=['Viral Genomics','Host–Virus Interactions','Cancer Biology','Bioinformatics'],ty=document.getElementById('ty');let wi=0,ci=0,dl=0;
 (function t(){const w=W[wi];ci+=dl?-1:1;ty.textContent=w.slice(0,ci);let d=dl?35:70;if(!dl&&ci===w.length){dl=1;d=1500}else if(dl&&ci===0){dl=0;wi=(wi+1)%W.length;d=300}setTimeout(t,d)})();
